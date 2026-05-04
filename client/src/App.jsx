@@ -5,7 +5,7 @@ import ChatMessage from './components/ChatMessage';
 import ChatInput from './components/ChatInput';
 import LoadingDots from './components/LoadingDots';
 
-const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = 'https://chatai-1rns.onrender.com/api';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -33,7 +33,7 @@ function App() {
         message: text,
         history: messages
       });
-      
+
       const aiMessage = { role: 'model', content: response.data.message };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (err) {
@@ -54,7 +54,7 @@ function App() {
           </div>
           <h1 className="text-xl font-semibold tracking-tight">Gemini AI</h1>
         </div>
-        <button 
+        <button
           onClick={() => setMessages([])}
           className="p-2 text-slate-400 hover:text-red-400 transition-colors"
           title="Clear Chat"
@@ -99,7 +99,7 @@ function App() {
               <span>{error}</span>
             </div>
           )}
-          
+
           <div ref={messagesEndRef} />
         </div>
       </main>
