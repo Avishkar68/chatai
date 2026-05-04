@@ -21,15 +21,16 @@ router.post('/chat', async (req, res) => {
     }));
 
     // Call Gemini API
-    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const chat = model.startChat({
       history: formattedHistory,
+      generationConfig: {
+        maxOutputTokens: 1000,
+      },
     });
 
     const result = await chat.sendMessage(message);
     const response = await result.response;
-    console.log("Gemini Raw Response:", JSON.stringify(response, null, 2));
-    
     const aiText = response.text();
 
     res.json({ message: aiText });
